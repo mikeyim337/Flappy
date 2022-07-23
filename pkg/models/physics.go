@@ -1,5 +1,35 @@
 package models
 
+type Point struct {
+	X float64
+	Y float64
+}
+
+func NewPoint2D(x, y float64) *Point {
+	return &Point{x, y} 
+}
+
+func AddValues(p1 *Point, x, y float64) Point {
+	return Point {
+		X: p1.X + x, 
+		Y: p1.Y + y,
+	}
+
+}
+
+func Add(p1, p2 * Point) *Point {
+	return &Point { X: p1.X + p2.X, Y: p1.Y + p2.Y }
+}
+
+
+func Mul(p1 *Point, x, y float64) *Point {
+	return &Point {
+		X: x* p1.X,
+		Y: p1.Y + p1.Y,
+	}
+}
+
+
 type Vector2D struct {
 	x float64
 	y float64
@@ -17,7 +47,8 @@ func (v * Vector2D) copy() *Vector2D {
 	}
 }
 
-func (v* Vector2D) apply(other * Vector2D) {
-	v.x *= other.x 
-	v.y *= other.y
+func (v* Vector2D) apply(other * Vector2D, delta float64) {
+	v.x *= other.x * delta
+	v.y *= other.y * delta
+
 }
